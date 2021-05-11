@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div @click="showMsg">클릭</div>
+      <div @click="removeVue">Vue 객체 삭제</div>
+
+      <div>data : {{message | toH}}</div>
+      <div v-if="hasMsg">{{message}}</div>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Hello 싸피",
+        },
+        methods: {
+          showMsg() {
+            console.log("method...............................showMsg: " + this.message);
+            return (this.message = "Hello SSAFY!!");
+          },
+          removeVue() {
+            console.log("method...............................removeVue:");
+            this.$destroy();
+          },
+        },
+        filters: {
+          toH: function (value) {
+            console.log(`filters................................toH: ${value}`);
+            return `${value}방가워요!!!!`;
+          },
+        },
+        computed: {
+          // 데이터가 변할 때마다 수행되고, 처리 결과가 cache된다.
+          hasMsg: function () {
+            console.log(`compute.................................hasMsg: `);
+            return this.message.length > 10;
+          },
+        },
+        // 데이터가 변하는지 감시하다 변하면 자동 호출
+        // 리턴할 필요가 없다.
+        // 형식: 데이터명:function(새로운갑, 이전값){ }
+        watch: {
+          message: function (newValue, oldValue) {
+            console.log(`watch....................................message${oldValue}`);
+            console.log(`watch....................................message${newValue}`);
+          },
+        },
+        beforeCreate() {
+          // new Vue()에 의해 Vue 객체가 생성되고 호출되는 hook
+          console.log(`beforeCreate...............................${this.message}`);
+        },
+        created() {
+          // Vue객체가 생성되고 초기화(속성에 대한) 처리 후에 호출되는 hook
+          console.log(`creadted...............................${this.message}`);
+        },
+        beforeMount() {
+          // DOM Tree가 구성되고 화면에 표시(랜더링) 되기 전에 호출되는 hook
+          console.log(`beforeMount...............................${this.message}`);
+        },
+        mounted() {
+          // DOM Tree가 구성되고 화면에 표시(랜더링) 된 후에 호출되는 hook
+          console.log(`mounted...............................${this.message}`);
+        },
+        beforeUpdate() {
+          // Vue 객체의 데이터가 변경되기 전에 호출되는 hook
+          console.log(`beforeUpdate...............................${this.message}`);
+        },
+        updated() {
+          // Vue 객체의 데이터가 변경된 후에 호출되는 hook
+          console.log(`updated...............................${this.message}`);
+        },
+        beforeDestroy() {
+          // Vue 객체가 소명되기 전에 호출되는 hook
+          console.log(`beforDestroy...............................${this.message}`);
+        },
+        destroyed() {
+          // Vue 객체가 완전히 소멸되기 바로 전에 호출
+          console.log(`destroyed...............................${this.message}`);
+        },
+      });
+    </script>
+  </body>
+</html>
