@@ -56,13 +56,12 @@
 
           if (board) {
             newBoard = JSON.parse(board); // 문자열로 된 JSON 데이터를 객체로 변환
+            newBoard.items.sort((a, b) => {
+              return a.no - b.no;
+            });
           } else {
             localStorage.setItem("board", JSON.stringify(newboard)); // 객체를 JSON 문자열로 변환
           }
-
-          newBoard.items.sort((a, b) => {
-            return a.no - b.no;
-          });
 
           this.boards = newBoard.items;
         },
