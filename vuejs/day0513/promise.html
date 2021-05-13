@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      /*
+        * Promise
+        -   싱글 쓰레드인 자바스크립트에서 비동기 처리를 위해서 콜백(callback)을 사용해왔다.
+            비동기 처리를 순차적으로 실행할 필요가 있는 경우 비동기 처리를 중첩시켜서 표현하므로 에러가 발생하거나
+            예외처리가 어렵다는 단점과, 중첩으로 인한 복잡도가 증가한다는 단점이 있어
+            이를 해결하기 위해 Promis를 지원한다.
+
+            생성 방식] new Promise((resolve, reject){ })
+                - 성공했을 때 resolve 함수를 수행하고 실패 또는
+                  실패 또는 에러가 발생했을 때 reject함수를 실행한다.
+        */
+
+      const promise1 = function (param) {
+        return new Promise(function (resolve, reject) {
+          if (param == 1) {
+            resolve("성공");
+          } else if (param == 2) {
+            reject("실패");
+          } else {
+            throw "error!!!";
+          }
+        });
+      };
+
+      promise1(1)
+        .then(function (result) {
+          console.log("정상실행");
+          console.log(result);
+        })
+        .catch(function (err) {
+          console.log("error 발생!!!");
+          console.log(err);
+        });
+
+      promise1(2)
+        .then(function (result) {
+          console.log("정상실행");
+          console.log(result);
+        })
+        .catch(function (err) {
+          console.log("error 발생!!!");
+          console.log(err);
+        });
+
+      promise1(3)
+        .then(function (result) {
+          console.log("정상실행");
+          console.log(result);
+        })
+        .catch(function (err) {
+          console.log("error 발생!!!");
+          console.log(err);
+        });
+    </script>
+  </head>
+  <body></body>
+</html>
